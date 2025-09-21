@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, #1a1a1a, #000);
+            overflow: hidden;
+        }
+
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 4em;
+            animation: glow 2s infinite alternate;
+            text-shadow: 0 0 10px #ff0, 0 0 20px #ff0, 0 0 30px #ff6347, 0 0 40px #ff6347;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff0, 0 0 20px #ff0, 0 0 30px #ff6347, 0 0 40px #ff6347;
+            }
+            to {
+                text-shadow: 0 0 20px #ff0, 0 0 30px #ff4500, 0 0 40px #ff4500, 0 0 50px #ff4500;
+            }
+        }
+
+        .firework {
+            position: absolute;
+            background-color: transparent;
+            border-radius: 50%;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .party-balloons {
+            position: absolute;
+            bottom: -150px;
+            animation: float 5s infinite;
+            width: 50px;
+            height: 70px;
+        }
+
+        .party-balloons::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ff0, #f00);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-300px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy New Year!</h1>
+
+    <script>
+        function createFirework() {
+            const firework = document.createElement("div");
+            firework.className = "firework";
+            firework.style.width = `${Math.random() * 10 + 10}px`;
+            firework.style.height = `${Math.random() * 10 + 10}px`;
+            firework.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            firework.style.top = `${Math.random() * window.innerHeight}px`;
+            firework.style.left = `${Math.random() * window.innerWidth}px`;
+            document.body.appendChild(firework);
+
+            firework.addEventListener("animationend", () => firework.remove());
+        }
+
+        function createBalloons() {
+            const balloon = document.createElement("div");
+            balloon.className = "party-balloons";
+            balloon.style.left = `${Math.random() * window.innerWidth}px`;
+            document.body.appendChild(balloon);
+
+            balloon.addEventListener("animationend", () => balloon.remove());
+        }
+
+        setInterval(createFirework, 500);
+        setInterval(createBalloons, 700);
+    </script>
+</body>
+</html>
